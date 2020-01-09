@@ -2,6 +2,7 @@ package com.example.fragmenttransaction08102019;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -11,9 +12,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+
+import java.util.Random;
 
 public class AndroidFragment extends Fragment {
 
+    View view;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -31,7 +36,10 @@ public class AndroidFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Log.d("BBB","onCreateView");
-        return inflater.inflate(R.layout.fragment_android, container, false);
+        View v = inflater.inflate(R.layout.fragment_android, container, false);
+        FrameLayout frameLayout = v.findViewById(R.id.frameLayout);
+        frameLayout.setBackgroundColor(Color.rgb(new Random().nextInt(255),new Random().nextInt(255),new Random().nextInt(255)));
+        return v;
     }
 
     @Override

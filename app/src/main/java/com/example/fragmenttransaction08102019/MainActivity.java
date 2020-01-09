@@ -60,6 +60,5 @@ public class MainActivity extends AppCompatActivity {
         IosFragment iosFragment = new IosFragment();
         fragmentTransaction.replace(R.id.liearlayoutContainer,iosFragment);
         fragmentTransaction.commit();
-
     }
 }
