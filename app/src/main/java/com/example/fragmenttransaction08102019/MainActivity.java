@@ -1,6 +1,7 @@
 package com.example.fragmenttransaction08102019;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -37,14 +38,14 @@ public class MainActivity extends AppCompatActivity {
     public void addAndroid(View view) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         AndroidFragment androidFragment = new AndroidFragment();
-        fragmentTransaction.add(R.id.liearlayoutContainer,androidFragment);
+        fragmentTransaction.add(R.id.liearlayoutContainer,androidFragment,"fragmentandroid");
         fragmentTransaction.commit();
     }
 
     public void addIos(View view) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         IosFragment iosFragment = new IosFragment();
-        fragmentTransaction.add(R.id.liearlayoutContainer,iosFragment);
+        fragmentTransaction.add(R.id.liearlayoutContainer,iosFragment,"fragmentios");
         fragmentTransaction.commit();
     }
 
@@ -60,5 +61,16 @@ public class MainActivity extends AppCompatActivity {
         IosFragment iosFragment = new IosFragment();
         fragmentTransaction.replace(R.id.liearlayoutContainer,iosFragment);
         fragmentTransaction.commit();
+    }
+
+    public void removeAndroid(View view) {
+        AndroidFragment androidFragment = (AndroidFragment) fragmentManager.findFragmentByTag("fragmentandroid");
+        if (androidFragment != null){
+            // Remove fragment nao duoc add vao sau cùng
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.remove(androidFragment);
+            fragmentTransaction.commit();
+        }
+
     }
 }
