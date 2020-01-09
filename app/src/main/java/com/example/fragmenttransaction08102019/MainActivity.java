@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         AndroidFragment androidFragment = new AndroidFragment();
         fragmentTransaction.add(R.id.liearlayoutContainer,androidFragment,"fragmentandroid");
+        fragmentTransaction.addToBackStack("android");
         fragmentTransaction.commit();
     }
 
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         IosFragment iosFragment = new IosFragment();
         fragmentTransaction.add(R.id.liearlayoutContainer,iosFragment,"fragmentios");
+        fragmentTransaction.addToBackStack("ios");
         fragmentTransaction.commit();
     }
 
@@ -71,6 +74,26 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.remove(androidFragment);
             fragmentTransaction.commit();
         }
+    }
+    public void popbackstack(View view) {
+        fragmentManager.popBackStack();
+    }
 
+    public void Detach(View view) {
+        AndroidFragment androidFragment = (AndroidFragment) fragmentManager.findFragmentByTag("fragmentandroid");
+        if (androidFragment != null){
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.detach(androidFragment);
+            fragmentTransaction.commit();
+        }
+    }
+
+    public void Attach(View view) {
+        AndroidFragment androidFragment = (AndroidFragment) fragmentManager.findFragmentByTag("fragmentandroid");
+        if (androidFragment != null){
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.attach(androidFragment);
+            fragmentTransaction.commit();
+        }
     }
 }
